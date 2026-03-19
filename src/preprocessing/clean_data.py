@@ -23,7 +23,7 @@ cat_imputer = SimpleImputer(strategy='most_frequent')
 df_clean[cat_cols] = cat_imputer.fit_transform(df_clean[cat_cols])
 
 # 4. Verify that there are no more missing values
-print("Remaining Null Values:\n", df_clean.isnull().sum())
+#print("Remaining Null Values:\n", df_clean.isnull().sum())
 
 # View the result
 
@@ -65,5 +65,5 @@ X_train[num_cols] = scaler.transform(X_train[num_cols])
 X_test[num_cols] = scaler.transform(X_test[num_cols])
 
 # Verify results: Training mean should be ~0 and std should be ~1
-print("Scaled Training Mean:\n", X_train[num_cols].mean())
-print("\nScaled Training Std:\n", X_train[num_cols].std())
+print("Scaled Training Mean:\n",X_train[num_cols].mean().round(2))
+print("\nScaled Training Std:\n", X_train[num_cols].std().round(2))
