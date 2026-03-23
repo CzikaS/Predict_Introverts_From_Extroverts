@@ -67,3 +67,15 @@ X_test[num_cols] = scaler.transform(X_test[num_cols])
 # Verify results: Training mean should be ~0 and std should be ~1
 print("Scaled Training Mean:\n",X_train[num_cols].mean().round(2))
 print("\nScaled Training Std:\n", X_train[num_cols].std().round(2))
+
+# 5. Save the preprocessed data to the processed folder
+from src.utils.paths import PROCESSED_DATA_DIR
+
+PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+X_train.to_csv(PROCESSED_DATA_DIR / "X_train.csv", index=False)
+X_test.to_csv(PROCESSED_DATA_DIR / "X_test.csv", index=False)
+y_train.to_csv(PROCESSED_DATA_DIR / "y_train.csv", index=False)
+y_test.to_csv(PROCESSED_DATA_DIR / "y_test.csv", index=False)
+
+print(f"Data successfully cleaned and saved to {PROCESSED_DATA_DIR}")
