@@ -27,3 +27,12 @@ PyCharm sometimes struggles to manage the Dockerized Jupyter server automaticall
 5. Select **External Server**.
 6. In the URL box, enter: `http://localhost:8888/?token=kaggle123`
 7. Leave all checkboxes unchecked and click **Apply** / **OK**.
+
+### Step 4: Running individual `.py` scripts (Crucial!)
+By default, running a Python script in PyCharm will stop your Jupyter server. To fix this, you must tell PyCharm to run scripts *inside* the existing container:
+1. Next to the Run/Play button at the top right, click the dropdown and select **Edit configuration templates...**
+2. Scroll down on the left side and select **Python** from the list.
+3. Scroll down to the **Docker Compose** settings.
+4. Type in the **Command and options:** cell: `exec`.
+5. Click **Apply** / **OK**. 
+Now you can run your scripts without breaking the notebook connection!
