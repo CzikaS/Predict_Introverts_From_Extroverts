@@ -9,7 +9,7 @@ file_path = RAW_DATA_DIR / "train.csv"
 df = pd.read_csv(file_path)
 df_clean = df.drop(columns=['id'])
 
-# 2. Encode Categorical/Target Variables (Safe to do before split as it's a hardcoded mapping)
+# 2. Encode Categorical/Target Variables
 binary_map = {'No': 0, 'Yes': 1}
 df_clean['Stage_fear'] = df_clean['Stage_fear'].map(binary_map)
 df_clean['Drained_after_socializing'] = df_clean['Drained_after_socializing'].map(binary_map)
@@ -17,12 +17,12 @@ df_clean['Drained_after_socializing'] = df_clean['Drained_after_socializing'].ma
 le = LabelEncoder()
 df_clean['Personality'] = le.fit_transform(df_clean['Personality'])
 
-# 3. SPLIT THE DATA FIRST
+# 3. Split the data
 X = df_clean.drop('Personality', axis=1)
 y = df_clean['Personality']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# 4. Impute Missing Values (FIT ON TRAIN ONLY)
+# 4. Impute Missing Values
 num_cols = ['Time_spent_Alone', 'Social_event_attendance', 'Going_outside', 'Friends_circle_size', 'Post_frequency']
 num_imputer = SimpleImputer(strategy='median')
 X_train[num_cols] = num_imputer.fit_transform(X_train[num_cols])
@@ -33,7 +33,7 @@ cat_imputer = SimpleImputer(strategy='most_frequent')
 X_train[cat_cols] = cat_imputer.fit_transform(X_train[cat_cols])
 X_test[cat_cols] = cat_imputer.transform(X_test[cat_cols]) # transform only!
 
-# 5. Scale Data (FIT ON TRAIN ONLY - You already did this correctly!)
+# 5. Scale Data
 scaler = StandardScaler()
 scaler.fit(X_train[num_cols])
 X_train[num_cols] = scaler.transform(X_train[num_cols])
