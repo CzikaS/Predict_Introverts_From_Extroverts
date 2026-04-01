@@ -22,7 +22,9 @@ RUN pip install --no-cache-dir \
     numpy \
     pandas \
     scikit-learn \
-    imbalanced-learn
+    imbalanced-learn \
+    xgboost \
+    catboost
 
 # Expose the port that JupyterLab will run on
 EXPOSE 8888
